@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/dgruber/drmaa2interface"
 	"github.com/dgruber/wfl"
+	"github.com/dgruber/wfl/pkg/context/docker"
 	"os"
 	"os/signal"
 	"syscall"
@@ -28,7 +29,7 @@ func cli() string {
 func main() {
 	image := cli()
 
-	ctx := wfl.NewDockerContext().OnError(panicf)
+	ctx := docker.NewDockerContext().OnError(panicf)
 	wf := wfl.NewWorkflow(ctx).OnError(panicf)
 
 	stageIn := make(map[string]string)
